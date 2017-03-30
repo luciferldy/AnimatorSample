@@ -7,13 +7,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name="com.luciferldy.animatorsample.FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme">
-        </activity>
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name="com.luciferldy.animatorsample.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

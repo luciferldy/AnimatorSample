@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">AnimSample</string>
+    <string name="app_name">AnimatorSample</string>
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    
+    <string name="animation">Animation</string>
+    <string name="animator">Animator</string>
+    <string name="fragment_animation">FragmentAnimation</string>
+    <string name="activity_animation">ActivityAnimation</string>
 </resources>

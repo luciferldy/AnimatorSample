@@ -1,4 +1,4 @@
-package com.luciferldy.animatorsample.ui.view;
+package com.luciferldy.animatorsample.ui;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;

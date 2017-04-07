@@ -1,4 +1,4 @@
-package com.luciferldy.animatorsample;
+package com.luciferldy.animatorsample.activity;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+
+import com.luciferldy.animatorsample.R;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.

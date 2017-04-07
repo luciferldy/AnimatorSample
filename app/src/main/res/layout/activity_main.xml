@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
 
     <Button
+        android:id="@+id/animation"
         android:layout_width="200dip"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:text="@string/animation"
+        app:theme="@style/Widget.AppCompat.Button.Colored"/>
 
-</>
+    <Button
+        android:id="@+id/animator"
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:text="@string/animator"/>
+
+    <Button
+        android:id="@+id/fragment_animation"
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_animation"/>
+
+    <Button
+        android:id="@+id/activity_animation"
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_animation"/>
+
+    <Button
+        android:id="@+id/shared_animation"
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:text="SharedAnimation"/>
+
+</LinearLayout>

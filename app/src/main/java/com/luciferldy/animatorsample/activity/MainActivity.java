@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
         }
         Intent intent = new Intent(MainActivity.this, BaseAnimationActivity.class);
-        startActivity(intent, bundle);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

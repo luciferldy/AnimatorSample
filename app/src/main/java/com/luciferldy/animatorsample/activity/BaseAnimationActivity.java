@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -40,8 +41,9 @@ public class BaseAnimationActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            switch (savedInstanceState.getInt(MainActivity.STYLE_KEY, 0)) {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            switch (bundle.getInt(MainActivity.STYLE_KEY, 0)) {
                 case MainActivity.STYLE_ANIMATOR:
                     performAnimator();
                     break;
@@ -59,7 +61,19 @@ public class BaseAnimationActivity extends AppCompatActivity {
                     break;
             }
         } else {
-            Log.e(LOG_TAG, "onCreate savedInstance is null.");
+            Log.i(LOG_TAG, "getIntent().getExtras() is null.");
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        Log.i(LOG_TAG, "onBackPressed, count " + count);
+        if (count > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
         }
     }
 
@@ -80,7 +94,9 @@ public class BaseAnimationActivity extends AppCompatActivity {
             }
         });
         final Button btnTranslate = (Button) findViewById(R.id.btn_translate);
-        final ObjectAnimator translateAnimator = ObjectAnimator.ofFloat(btnTranslate, "translationX", 0, btnTranslate.getWidth(), 0)
+        // getWidth() is 0
+//        Log.i(LOG_TAG, "btnTranslate width: " + btnTranslate.getWidth());
+        final ObjectAnimator translateAnimator = ObjectAnimator.ofFloat(btnTranslate, View.TRANSLATION_X, 0, 100, -100, 0)
                 .setDuration(2000);
         final Button btnScale = (Button) findViewById(R.id.btn_scale);
         final ObjectAnimator scaleAnimator = ObjectAnimator.ofFloat(btnScale, "scaleX", 1.0f, 1.5f, 1.0f)
@@ -117,9 +133,11 @@ public class BaseAnimationActivity extends AppCompatActivity {
         setContentView(R.layout.base_animation);
         final Button btnAlpha = (Button) findViewById(R.id.btn_alpha);
         final AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0);
+        alphaAnimation.setFillAfter(true); // 保持动画结束时的状态
+//        alphaAnimation.setFillBefore(true); // 当动画结束时保持动画开始的状态
         alphaAnimation.setDuration(2000);
         final Button btnRotate = (Button) findViewById(R.id.btn_rotate);
-        final RotateAnimation rotateAnimation = new RotateAnimation(0 ,360);
+        final RotateAnimation rotateAnimation = new RotateAnimation(0 ,360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotateAnimation.setDuration(2000);
         final Button btnTranslate = (Button) findViewById(R.id.btn_translate);
         final TranslateAnimation translateAnimation = (TranslateAnimation) AnimationUtils.loadAnimation(getBaseContext(), R.anim.base_translate);
@@ -156,12 +174,18 @@ public class BaseAnimationActivity extends AppCompatActivity {
 
     private void performFragmentAnimation() {
         setContentView(R.layout.fragment_animation);
-        BaseAnimationFragment fragment = new BaseAnimationFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(android.R.id.content, fragment, BaseAnimationFragment.class.getSimpleName());
-        transaction.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit);
-        transaction.addToBackStack(BaseAnimationFragment.class.getSimpleName() + "#" + System.currentTimeMillis());
-        transaction.commit();
+        findViewById(R.id.add_fragment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BaseAnimationFragment fragment = new BaseAnimationFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_enter, R.anim.slide_exit);
+                transaction.add(android.R.id.content, fragment, BaseAnimationFragment.class.getSimpleName());
+                transaction.addToBackStack(BaseAnimationFragment.class.getSimpleName() + "#" + System.currentTimeMillis());
+                transaction.commit();
+            }
+        });
+
     }
 
     private void performActivityAnimation() {

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Explode;
 import android.transition.Fade;
@@ -21,7 +20,6 @@ import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
@@ -36,6 +34,9 @@ import com.luciferldy.animatorsample.R;
 public class BaseAnimationActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = BaseAnimationActivity.class.getSimpleName();
+    private static final int ANIMATION_DURATION = 1000;
+    private static final int ACTIVITY_ANIMATION_DURATION = 300;
+    private static final int FRAGMENT_ANIMATION_DURATION = 300;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,10 +82,10 @@ public class BaseAnimationActivity extends AppCompatActivity {
         setContentView(R.layout.base_animation);
         final Button btnAlpha = (Button) findViewById(R.id.btn_alpha);
         final ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(btnAlpha, "alpha", 1.0f, 0)
-                .setDuration(2000);
+                .setDuration(ANIMATION_DURATION);
         final Button btnRotate = (Button) findViewById(R.id.btn_rotate);
         final ValueAnimator rotateAnimator = ValueAnimator.ofInt(0, 360)
-                .setDuration(2000);
+                .setDuration(ANIMATION_DURATION);
         rotateAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             int value;
             @Override
@@ -97,10 +98,10 @@ public class BaseAnimationActivity extends AppCompatActivity {
         // getWidth() is 0
 //        Log.i(LOG_TAG, "btnTranslate width: " + btnTranslate.getWidth());
         final ObjectAnimator translateAnimator = ObjectAnimator.ofFloat(btnTranslate, View.TRANSLATION_X, 0, 100, -100, 0)
-                .setDuration(2000);
+                .setDuration(ANIMATION_DURATION);
         final Button btnScale = (Button) findViewById(R.id.btn_scale);
         final ObjectAnimator scaleAnimator = ObjectAnimator.ofFloat(btnScale, "scaleX", 1.0f, 1.5f, 1.0f)
-                .setDuration(2000);
+                .setDuration(ANIMATION_DURATION);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,16 +136,16 @@ public class BaseAnimationActivity extends AppCompatActivity {
         final AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0);
         alphaAnimation.setFillAfter(true); // 保持动画结束时的状态
 //        alphaAnimation.setFillBefore(true); // 当动画结束时保持动画开始的状态
-        alphaAnimation.setDuration(2000);
+        alphaAnimation.setDuration(ANIMATION_DURATION);
         final Button btnRotate = (Button) findViewById(R.id.btn_rotate);
         final RotateAnimation rotateAnimation = new RotateAnimation(0 ,360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        rotateAnimation.setDuration(2000);
+        rotateAnimation.setDuration(ANIMATION_DURATION);
         final Button btnTranslate = (Button) findViewById(R.id.btn_translate);
         final TranslateAnimation translateAnimation = (TranslateAnimation) AnimationUtils.loadAnimation(getBaseContext(), R.anim.base_translate);
-        translateAnimation.setDuration(2000);
+        translateAnimation.setDuration(ANIMATION_DURATION);
         final Button btnScale = (Button) findViewById(R.id.btn_scale);
         final ScaleAnimation scaleAnimation = (ScaleAnimation) AnimationUtils.loadAnimation(getBaseContext(), R.anim.base_scale);
-        scaleAnimation.setDuration(2000);
+        scaleAnimation.setDuration(ANIMATION_DURATION);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,7 +203,7 @@ public class BaseAnimationActivity extends AppCompatActivity {
                 switch (v.getId()) {
                     case R.id.fade:
                         Fade fade = new Fade();
-                        fade.setDuration(1500);
+                        fade.setDuration(ACTIVITY_ANIMATION_DURATION);
                         getWindow().setEnterTransition(fade);
                         getWindow().setExitTransition(fade);
                         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(BaseAnimationActivity.this);
@@ -211,7 +212,7 @@ public class BaseAnimationActivity extends AppCompatActivity {
                         break;
                     case R.id.slide:
                         Slide slide = new Slide();
-                        slide.setDuration(1500);
+                        slide.setDuration(ACTIVITY_ANIMATION_DURATION);
                         slide.setSlideEdge(Gravity.END);
                         getWindow().setEnterTransition(slide);
                         getWindow().setExitTransition(slide);
@@ -221,7 +222,7 @@ public class BaseAnimationActivity extends AppCompatActivity {
                         break;
                     case R.id.explode:
                         Explode explode = new Explode();
-                        explode.setDuration(1500);
+                        explode.setDuration(ACTIVITY_ANIMATION_DURATION);
                         getWindow().setEnterTransition(explode);
                         getWindow().setExitTransition(explode);
                         ActivityOptionsCompat optionsExplode = ActivityOptionsCompat.makeSceneTransitionAnimation(BaseAnimationActivity.this);

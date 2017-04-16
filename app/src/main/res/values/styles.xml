@@ -24,6 +24,21 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:textAllCaps">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- 使用 xml 定义动画 -->
+    <style name="AppTheme.NoActionBar.AnimationTheme">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_out_right</item>
+        <!--<item name="android:activityOpenExitAnimation"></item>-->
+        <!--<item name="android:activityCloseExitAnimation"></item>-->
+    </style>
+
+    <!-- 使用 style 方式定义 ActivityOptions 的动画 -->
+    <style name="AppTheme.NoActionBar.ActivityOptionsAnimationTheme">
+        <item name="android:windowEnterTransition">@transition/activity_explode</item>
+        <item name="android:windowExitTransition">@transition/activity_explode</item>
     </style>
 
 </resources>

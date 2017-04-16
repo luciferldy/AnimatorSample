@@ -28,3 +28,9 @@ Use `transaction.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.an
 
 You can also check `SharedElements` in `SharedElementsActivity.class` .
 
+
+
+Some other reference:
+
+[https://github.com/yipianfengye/Android-activityAnim](https://github.com/yipianfengye/Android-activityAnim)
+

@@ -4,6 +4,8 @@
 
 Android animation sample contains `animation` , `animator` , `fragment transition` , `activity transition` 
 
+Now I strongly recommend that you should read [https://github.com/lgvalle/Material-Animations/](https://github.com/lgvalle/Material-Animations/). That article introduce the usage of android transition framework. You will get the point of enter, return, exit, reenter, etc.
+
 ### Animation
 
 Use `xml` or `Animation` subclass to implement effect rotate, transition, alpha and scale.
